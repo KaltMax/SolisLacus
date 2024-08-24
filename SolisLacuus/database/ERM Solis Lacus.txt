@@ -1,0 +1,51 @@
+Entities:
+
+    user
+        Attribute: user_id (Primary Key), username, email, anrede, fname, lname, password, role, user_status
+
+    rooms
+        Attribute: room_id (Primary Key), room_type, room_price
+
+    bookings
+        Attribute: booking_id (Primary Key), user_id (Foreign Key referencing User), room_id (Foreign Key referencing Room), 
+	bookingdate, checkin, checkout, breakfast, pets, parking, totalprice, status 
+
+    prices
+	price_id (Primary Key), type, price
+
+    blogposts
+	Attribute: blogpost_id (Primary Key), content, upload_date, picturename, picturepath 
+    
+
+Relationships:
+
+    User - Booking: One-to-Many relationship. A user can make multiple bookings, and a booking can be made by one user.
+    Room - Booking: One-to-Many relationship. A room can be booked multiple times, and a booking involves one room.
+
+
++------------+          +---------------+     +-----------------+    
+|   User     |          |  Bookings     |     |     Prices      |    
++------------+          +---------------+     +-----------------+    
+| User_ID(PK)|----|     | Booking_ID(PK)|     |  price_id (PK)  |
+| Username   |    |-----| User_ID(FK)   |     |  Type           |
+| Email      |    |     | Room_ID(FK)   |     |  Price          |
+| Password   |    |     | Bookingdate 	|     +-----------------+
++------------+    |     | CheckIn       |                                
+   		          |     | CheckOut      |
+                  |     | Pets          |
+	              |     | Breakfast     |
+		          |	    | Parking       |
+                  |     | Totalprice    |
+                  |     | Status        |
+                  |	    +---------------+
+                / 
++------------+ /        +--------------+
+|   Rooms    |/         |   Blogpost   |
++------------+          +--------------+    
+| RoomID(PK) |        	| Blogpost_ID  |
+| Room_type  |	        | Content      |
+| room_Price |         	| Upload_Date  |		                          
++------------+          | pciturename  |
+			            | picturepath  |
+			            +--------------+
+
